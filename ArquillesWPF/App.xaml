@@ -1,0 +1,21 @@
+﻿<Application x:Class="ArquillesWPF.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:ArquillesWPF"
+             xmlns:viewModel="clr-namespace:ArquillesWPF.MVVM.ViewModel"
+             xmlns:view="clr-namespace:ArquillesWPF.MVVM.View"
+             StartupUri="MainWindow.xaml">
+    <!--     // Attention, if you've done everything right and some error subscription appears, just Ctrl + Shift + B will rebuild the code and make everything settle -->
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Theme/MenuButtonTheme.xaml"/>
+                <ResourceDictionary Source="Theme/TextBoxTheme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
+                <view:HomeView/>
+            </DataTemplate>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
