@@ -1,0 +1,42 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style TargetType="{x:Type Border}"
+           x:Key="UpperMenuTheme">
+        <Style.Setters>
+            <Setter Property="Background" Value="#15090b"/>
+        </Style.Setters>
+        <Style.Triggers>
+            <EventTrigger RoutedEvent="Border.MouseEnter">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="(Border.Width)"
+                                                                         To="700"
+                                                                         Duration="0:0:.3"/>
+                            <DoubleAnimation Storyboard.TargetProperty="(Border.Height)"
+                                                                         To="100"
+                                                                         Duration="0:0:.3"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="Border.MouseLeave">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="(Canvas.Left)"
+                                                                         To="365"
+                                                                         Duration="0:0:.3"/>
+                            <DoubleAnimation Storyboard.TargetProperty="(Border.Width)"
+                                                                         To="50"
+                                                                         Duration="0:0:.2"/>
+                            <DoubleAnimation Storyboard.TargetProperty="(Border.Height)"
+                                                                         To="30"
+                                                                         Duration="0:0:.3"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>

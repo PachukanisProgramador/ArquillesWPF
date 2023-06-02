@@ -1,0 +1,73 @@
+﻿<Window x:Class="ArquillesWPF.MVVM.View.ConfirmationBoxView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ArquillesWPF.MVVM.View"
+        mc:Ignorable="d"
+        Title="ConfirmationBoxView"
+        Height="150"
+        Width="350"
+        WindowStyle="None"
+        Background="Transparent"
+        ResizeMode="NoResize"
+        AllowsTransparency="True">
+
+    <Border Background="#1b1b1b"
+            CornerRadius="5"
+            BorderThickness=".3"
+            BorderBrush="#DCEBF5">
+        <Grid Background="Transparent">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height=".5*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Tem certeza que deseja sair?"
+                       Foreground="#DCEBF5"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Margin="20"
+                       FontSize="16"
+                       TextWrapping="Wrap"/>
+            <Border Grid.Row="1"
+                    Background="#212121"
+                    CornerRadius="0,0,5,5"
+                    BorderBrush="#DCEBF5">
+
+                <StackPanel HorizontalAlignment="Right"
+                            VerticalAlignment="Bottom"
+                            Width="180"
+                            Margin="0,0,10,12">
+                    <Grid HorizontalAlignment="Stretch"
+                          VerticalAlignment="Center"
+                          Height="25">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Button Grid.Column="0"
+                                Content="Sim"
+                                BorderThickness="0"
+                                Background="#DCEBF5"
+                                FontSize="16"
+                                Foreground="#212121"
+                                Style="{StaticResource UtilityButtonTheme}"
+                                Click="BotaoSim_Click"/>
+
+                        <Button Grid.Column="1"
+                                Content="Não"
+                                BorderThickness="0"
+                                Background="#1b1b1b"
+                                FontSize="16"
+                                Foreground="#DCEBF5" 
+                                Style="{StaticResource UtilityButtonTheme}"
+                                Click="BotaoNao_Click"/>
+
+                    </Grid>
+                </StackPanel>
+
+            </Border>
+        </Grid>
+    </Border>
+</Window>

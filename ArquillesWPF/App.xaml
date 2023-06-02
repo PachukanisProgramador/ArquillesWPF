@@ -4,13 +4,18 @@
              xmlns:local="clr-namespace:ArquillesWPF"
              xmlns:viewModel="clr-namespace:ArquillesWPF.MVVM.ViewModel"
              xmlns:view="clr-namespace:ArquillesWPF.MVVM.View"
-             StartupUri="MainWindow.xaml">
+             StartupUri="MVVM/View/MainWindow.xaml">
     <!--     // Attention, if you've done everything right and some error subscription appears, just Ctrl + Shift + B will rebuild the code and make everything settle -->
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Theme/MenuButtonTheme.xaml"/>
                 <ResourceDictionary Source="Theme/TextBoxTheme.xaml"/>
+                <ResourceDictionary Source="Theme/ConnectButtonTheme.xaml"/>
+                <ResourceDictionary Source="Theme/LateralMenuTheme.xaml"/>
+                <ResourceDictionary Source="Theme/TitleBarButton.xaml"/>
+                <ResourceDictionary Source="Theme/UpperConnectionMenuTheme.xaml"/>
+                <ResourceDictionary Source="Theme/UtilitaryButtonTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">

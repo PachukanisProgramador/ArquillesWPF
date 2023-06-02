@@ -1,0 +1,102 @@
+﻿<Window x:Class="ArquillesWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ArquillesWPF"
+        xmlns:core="clr-namespace:ArquillesWPF.Core" 
+        xmlns:viewModel="clr-namespace:ArquillesWPF.MVVM.ViewModel"
+        mc:Ignorable="d"
+        Height="600" Width="920"
+        MinHeight="600"
+        MinWidth="920"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Background="Transparent"
+        AllowsTransparency="True">
+
+    <!-- Colors Templates
+    #1F0D10
+    #210E11
+    #2a1316
+    #251013
+    #15090b
+    -->
+
+    <Window.DataContext>
+        <viewModel:MainViewModel/>
+    </Window.DataContext>
+    
+    <Border Grid.Row="0"
+            Background="#15090b"
+            CornerRadius="5"
+            BorderBrush="#DCEBF5"
+            BorderThickness=".3">
+        <DockPanel Background="Transparent"
+                   Height="Auto"
+                   Width="Auto">
+            <Border Height="50"
+                    Background="#15090b"
+                    DockPanel.Dock="Top"
+                    CornerRadius="10,10,0,0">
+                <Border.InputBindings>
+                    <MouseBinding MouseAction="LeftClick"
+                          Command="{Binding MoveWindowCommand}"/>
+                </Border.InputBindings>
+                
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Arquilles"
+                               FontSize="15"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               Foreground="#7e7e7e"
+                               Margin="20,0,0,0"/>
+                    <StackPanel Grid.Column="1"
+                                Orientation="Horizontal"
+                                HorizontalAlignment="Right">
+                        <Button Content="🗕"
+                                Style="{StaticResource TitleBarButtonTheme}"
+                                Command="{Binding MinimizeWindowCommand}"/>
+                        <Button Content="🗙︎"
+                                Style="{StaticResource TitleBarButtonTheme}"
+                            Command="{Binding ShutDownProgramCommand}"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+            <Border HorizontalAlignment="Left"
+                    DockPanel.Dock="Left"
+                    Style="{StaticResource LateralMenuTheme}"
+                    CornerRadius="5,0,0,5">
+
+                <StackPanel>
+                    <RadioButton Content="Transferência direta"
+                                 FontWeight="Normal"
+                                 core:Extensions.Icon="&#x21b7;"
+                                 Padding="20,0,0,3"
+                                 IsChecked="True"
+                                 Style="{StaticResource MenuButtonTheme}" Cursor="Hand"/>
+                    <RadioButton Content="Sobre o Projeto"
+                                 FontWeight="Normal"
+                                 core:Extensions.Icon="&#128737;"
+                                 Padding="18,0,0,0"
+                                 Style="{StaticResource MenuButtonTheme}"/>
+                </StackPanel>
+            </Border>
+            <Grid Width="Auto"
+                  Height="Auto"
+                  HorizontalAlignment="Stretch"
+                  VerticalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <ContentPresenter Content="{Binding CurrentView}"/>
+                
+            </Grid>
+        </DockPanel>
+    </Border>
+</Window>
