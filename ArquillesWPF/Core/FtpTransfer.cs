@@ -16,33 +16,34 @@ namespace ArquillesWPF.Core
     internal class FtpTransfer
     {
         private string _mensagemLog;
+        private string _endereco;
+        private string _usuario;
+        private string _senha;
 
-        public ObservableCollection<List<string>> Resultado { get; set; }
-        public RelayCommand ConexaoFtp { get; set; }
 
-        public string Endereco { get; set; }
-        public string Usuario { get; set; }
-        public string Senha { get; set; }
+        public string Endereco { get { return _endereco; } set { value = _endereco; } }
+        public string Usuario { get { return _usuario; } set { value = _usuario; } }
+        public string Senha { get { return _senha; } set { value = _senha; } }
 
         public string MensagemLog { get { return _mensagemLog; } set { _mensagemLog = value; } }
 
-        public FtpTransfer()
+        public FtpTransfer(string endereco, string usuario, string senha)
         {
-            string endereco = "";
+            _endereco = endereco; _usuario = usuario; _senha = senha;
+        }
+        public string Transferencia()
+        {
 
-            Uri uri = new Uri("ftp://" + endereco + "//");
+            Uri uri = new Uri("ftp://" + "ftp.microsoft.com" + "//");
             FtpWebRequest requisicao = (FtpWebRequest)WebRequest.Create(uri);
             NetworkCredential credenciais = new NetworkCredential(
-                Environment.UserDomainName,
-                Usuario,
-                Senha
+                _usuario,
+                _senha,
+                Environment.UserDomainName
                 );
 
             requisicao.Credentials = credenciais;
-            requisicao.EnableSsl = false;
             requisicao.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
-            requisicao.KeepAlive = true;
-            requisicao.UsePassive = true;
 
             FtpWebResponse resposta = (FtpWebResponse)requisicao.GetResponse();
 
@@ -51,6 +52,8 @@ namespace ArquillesWPF.Core
             _mensagemLog = stream.ReadToEnd();
 
             resposta.Close();
+
+            return _mensagemLog;
         }
     }
 }

@@ -16,6 +16,7 @@
                 <ResourceDictionary Source="Theme/TitleBarButton.xaml"/>
                 <ResourceDictionary Source="Theme/UpperConnectionMenuTheme.xaml"/>
                 <ResourceDictionary Source="Theme/UtilitaryButtonTheme.xaml"/>
+                <ResourceDictionary Source="Theme/ButtonUploadTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
