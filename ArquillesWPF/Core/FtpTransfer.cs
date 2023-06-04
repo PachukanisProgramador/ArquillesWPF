@@ -31,29 +31,37 @@ namespace ArquillesWPF.Core
         {
             _endereco = endereco; _usuario = usuario; _senha = senha;
         }
-        public string Transferencia()
+        public string Conectar()
         {
+            try
+            {
+                Uri uri = new Uri("ftp://" + "ftp.microsoft.com" + "//");
+                FtpWebRequest requisicao = (FtpWebRequest)WebRequest.Create(uri);
+                NetworkCredential credenciais = new NetworkCredential(
+                    _usuario,
+                    _senha,
+                    Environment.UserDomainName
+                    );
 
-            Uri uri = new Uri("ftp://" + "ftp.microsoft.com" + "//");
-            FtpWebRequest requisicao = (FtpWebRequest)WebRequest.Create(uri);
-            NetworkCredential credenciais = new NetworkCredential(
-                _usuario,
-                _senha,
-                Environment.UserDomainName
-                );
+                requisicao.Credentials = credenciais;
+                requisicao.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
 
-            requisicao.Credentials = credenciais;
-            requisicao.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
+                FtpWebResponse resposta = (FtpWebResponse)requisicao.GetResponse();
 
-            FtpWebResponse resposta = (FtpWebResponse)requisicao.GetResponse();
+                StreamReader stream = new StreamReader(resposta.GetResponseStream(), Encoding.ASCII);
 
-            StreamReader stream = new StreamReader(resposta.GetResponseStream(), Encoding.ASCII);
+                _mensagemLog = stream.ReadToEnd();
 
-            _mensagemLog = stream.ReadToEnd();
+                resposta.Close();
 
-            resposta.Close();
+                return _mensagemLog;
 
-            return _mensagemLog;
+            }
+            catch (Exception erro)
+            {
+                throw erro;
+            }
+
         }
     }
 }

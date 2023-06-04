@@ -3,13 +3,12 @@ using ArquillesWPF.MVVM.View;
 using System;
 using System.Threading;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace ArquillesWPF.MVVM.ViewModel
 {
     class MainViewModel : ObservableObject
     {
-        public HomeViewModel HomeVm { get; set; }
+        public HomeViewModel TranferenciaSimplesView { get; set; }
         private object _currentView;
 
         /* Commands */
@@ -18,8 +17,6 @@ namespace ArquillesWPF.MVVM.ViewModel
         public RelayCommand ShutDownProgramCommand { get; set; }
 
         public RelayCommand MinimizeWindowCommand { get; set; }
-
-        public RelayCommand IniciarFtp { get; set; }
 
         public object CurrentView
         {
@@ -46,8 +43,8 @@ namespace ArquillesWPF.MVVM.ViewModel
 
             MinimizeWindowCommand = new RelayCommand(o => { Application.Current.MainWindow.WindowState = WindowState.Minimized; });
 
-            HomeVm = new HomeViewModel();
-            CurrentView = HomeVm;
+            TranferenciaSimplesView = new HomeViewModel();
+            CurrentView = TranferenciaSimplesView;
         }
     }
 }

@@ -11,7 +11,7 @@
              d:DesignWidth="860"
              MinWidth="860"
              MinHeight="570"
-             Background="#0E0A0A"
+             Background="Transparent"
              HorizontalAlignment="Stretch"
              VerticalAlignment="Stretch">
     <UserControl.DataContext>
@@ -42,12 +42,11 @@
                     Margin="30,0,0,00">
 
             <TextBox Style="{StaticResource TextBoxTheme}"
-                             Width="150"
-                             Height="40"
-                             Text="{Binding TextoEndereco}"
-                             Grid.Column="0"
-                             Margin="0,0,0,0"
-                     x:Name="textBoxEndereco"/>
+                     Width="150"
+                     Height="40"
+                     Text="Endereço"
+                     Grid.Column="0"
+                     Margin="0,0,0,0"/>
             <TextBox Style="{StaticResource TextBoxTheme}"
                              Width="120"
                              Height="40"
@@ -59,14 +58,14 @@
                              Height="40"
                              Text="Senha"
                              Grid.Column="2"
-                             Margin="20,0,50,0"
+                             Margin="20,0,250,0"
                      Name="Senha"/>
-            <Button Background="#00961E"
-                                    Content="Conectar"
-                                    Height="30"
-                                    Width="100"
-                                    Margin="0,0,0,0"
-                                    Style="{StaticResource ConnectButtonTheme}"
+            <Button 
+                    Content="Conectar"
+                    Height="30"
+                    Width="100"
+                    Margin="0,0,0,0"
+                    Style="{StaticResource ConnectButtonTheme}"
                     Command="{Binding IniciarFtp}"/>
 
         </StackPanel>
@@ -76,14 +75,14 @@
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                 Margin="30,30,30,0"
-                Background="LightGray">
+                Background="#F0E2A3">
 
             <StackPanel>
                 <TextBlock Text="Histórico"
                                    Foreground="#0e0e0e"
-                                   HorizontalAlignment="Center"
-                                   FontSize="25"
-                           Margin="0,5,0,10"/>
+                                   HorizontalAlignment="Left"
+                                   FontSize="20"
+                           Margin="10,1,0,1"/>
                 <TextBlock Width="800"
                            Height="100"
                            ScrollViewer.CanContentScroll="True"
@@ -91,16 +90,25 @@
                            Foreground="Green"
                            FontSize="18"
                            Padding="30,2,0,30"
-                           Text="{Binding TextoCaixaHistorico }"/>
+                           Text="{Binding TextoCaixaHistorico}"/>
             </StackPanel>
         </Border>
         <StackPanel Grid.Row="4"
                     Margin="100">
             <Button Width="200"
-                    Height="80"
+                    Height="35"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
                     Content="Subir arquivos"
+                    FontSize="18"
+                    Command="{Binding SubirArquivos}"
+                    Style="{StaticResource UploadButtonTheme}"
+                    Margin="0,0,0,10"/>
+            <Button Width="200"
+                    Height="70"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Content="Enviar"
                     FontSize="20"
                     Command="{Binding SubirArquivos}"
                     Style="{StaticResource UploadButtonTheme}"/>

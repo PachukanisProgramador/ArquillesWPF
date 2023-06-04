@@ -1,7 +1,9 @@
 ﻿using ArquillesWPF.Core;
+using ArquillesWPF.MVVM.View;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,33 +20,17 @@ namespace ArquillesWPF.MVVM.ViewModel
         private string _textoCaixaHistorico;
         private string _textoUsuario;
         private string _textoSenha;
+        private FtpTransfer _ftp;
 
         /* Commands */
-        public RelayCommand MoveWindowCommand { get; set; }
-
-        public RelayCommand ShutDownProgramCommand { get; set; }
-
-        public RelayCommand MinimizeWindowCommand { get; set; }
 
         public RelayCommand IniciarFtp { get; set; }
         public RelayCommand SubirArquivos { get; set; }
-
-        public object CurrentView
-        {
-            get { return _currentView; }
-            set { _currentView = value; OnPropertyChanged(); }
-        }
 
         public string TextoEndereco
         {
             get { return _textoEndereco; }
             set { _textoEndereco = value; OnPropertyChanged(); }
-        }
-
-        public string TextoCaixaHistorico
-        {
-            get { return _textoCaixaHistorico; }
-            set { _textoCaixaHistorico = value; OnPropertyChanged(); }
         }
 
         public string TextoUsuario
@@ -57,26 +43,32 @@ namespace ArquillesWPF.MVVM.ViewModel
             get { return _textoSenha; }
             set { _textoSenha = value; OnPropertyChanged(); }
         }
+        public string TextoCaixaHistorico
+        {
+            get { return _textoCaixaHistorico; }
+            set { _textoCaixaHistorico = value; OnPropertyChanged(); }
+        }
 
         public HomeViewModel()
         {
+            _ftp = new FtpTransfer(TextoEndereco, TextoUsuario, TextoSenha);
+
             IniciarFtp = new RelayCommand(o =>
             {
-                _textoEndereco = TextoEndereco;
-                TextoCaixaHistorico = _textoEndereco;
+                TextoCaixaHistorico = _ftp.Conectar();
             });
 
             SubirArquivos = new RelayCommand(p =>
             {
-                TextoCaixaHistorico = Transferir();
+                EscolherArquivos();
             });
         }
 
-        public string Transferir()
+        private void EscolherArquivos()
         {
             string caminhoArquivo;
             string nomeArquivo;
-            FtpTransfer ftp = new FtpTransfer(TextoEndereco, TextoUsuario, TextoSenha);
+
             try
             {
                 OpenFileDialog ofd = new OpenFileDialog();
@@ -85,15 +77,12 @@ namespace ArquillesWPF.MVVM.ViewModel
                 {
                     caminhoArquivo = ofd.FileName;
                     nomeArquivo = caminhoArquivo.Split('\\')[caminhoArquivo.Split('\\').Length - 1];
-                    TextoCaixaHistorico = "O arquivo escolhido foi: " + nomeArquivo + "\nEle pode ser encontrado em: " + caminhoArquivo.ToString();
-
-                    return ftp.Transferencia();
+                    MessageBox.Show($"Arquivo escolhido para transferência: {nomeArquivo} \n\n({caminhoArquivo.ToString()})");
                 }
-                return "Escolha um arquivo para transferir";
             }
             catch (Exception erro)
             {
-                return erro.Message;
+                throw erro;
             }
         }
     }

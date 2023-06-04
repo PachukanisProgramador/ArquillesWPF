@@ -28,7 +28,7 @@
     </Window.DataContext>
     
     <Border Grid.Row="0"
-            Background="#15090b"
+            Background="#1F1616"
             CornerRadius="5"
             BorderBrush="#DCEBF5"
             BorderThickness=".3">
