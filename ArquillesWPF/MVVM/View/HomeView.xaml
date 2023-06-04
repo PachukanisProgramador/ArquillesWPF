@@ -111,7 +111,12 @@
                     Content="Enviar"
                     FontSize="20"
                     Command="{Binding SubirArquivos}"
-                    Style="{StaticResource UploadButtonTheme}"/>
+                    Style="{StaticResource UploadButtonTheme}"
+                    Margin="0,0,0,10"/>
+            <ProgressBar Height="10"
+                Minimum="0"
+                Maximum="100"
+                Value="{Binding SubirArquivos}" />
         </StackPanel>
     </Grid>
 </UserControl>

@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using ArquillesWPF.MVVM.View;
 using Microsoft.Win32;
 using System.Windows.Controls;
+using System.ComponentModel;
+using System.Xml.Schema;
 
 namespace ArquillesWPF.Core
 {
@@ -19,6 +21,7 @@ namespace ArquillesWPF.Core
         private string _endereco;
         private string _usuario;
         private string _senha;
+        private FtpWebRequest _requisicao;
 
 
         public string Endereco { get { return _endereco; } set { value = _endereco; } }
@@ -30,6 +33,8 @@ namespace ArquillesWPF.Core
         public FtpTransfer(string endereco, string usuario, string senha)
         {
             _endereco = endereco; _usuario = usuario; _senha = senha;
+            Uri uri = new Uri("ftp://" + "192.168.100.10" + "//");
+            _requisicao = (FtpWebRequest)WebRequest.Create(uri);
         }
         public string Conectar()
         {
@@ -78,6 +83,30 @@ namespace ArquillesWPF.Core
                 return erro.Message;
             }
 
+        }
+
+        public void Transferir(string enderecoArquivo)
+        {
+            if(enderecoArquivo != "")
+            {
+                Stream ftpTransmissao = _requisicao.GetRequestStream();
+                FileStream fileStream = File.OpenRead(enderecoArquivo);
+                BackgroundWorker processo = new BackgroundWorker();
+                byte[] buffer = new byte[1024];
+                double tamanhoTransmissao = (double)fileStream.Length;
+                int byteRead = 0;
+                double leitor = 0;
+
+                do
+                {
+                    byteRead = fileStream.Read(buffer,0,1024);
+                    ftpTransmissao.Write(buffer,0,byteRead);
+                    leitor += (double)byteRead;
+                    double porcentagemCarregamento = leitor / tamanhoTransmissao * 100;
+                    processo.ReportProgress((int)porcentagemCarregamento):
+                }
+                while (byteRead != 0);
+            }
         }
     }
 }

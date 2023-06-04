@@ -3,8 +3,10 @@ using ArquillesWPF.MVVM.View;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,6 +22,7 @@ namespace ArquillesWPF.MVVM.ViewModel
         private string _textoCaixaHistorico;
         private string _textoUsuario;
         private string _textoSenha;
+        private double _progressoTransmissao;
         private FtpTransfer _ftp;
 
         /* Commands */
@@ -49,6 +52,12 @@ namespace ArquillesWPF.MVVM.ViewModel
             set { _textoCaixaHistorico = value; OnPropertyChanged(); }
         }
 
+        public double ProgressoTransmissao
+        {
+            get { return _progressoTransmissao}
+            set { _progressoTransmissao = value; OnPropertyChanged(); }
+        }
+
         public HomeViewModel()
         {
             _ftp = new FtpTransfer(TextoEndereco, TextoUsuario, TextoSenha);
@@ -60,11 +69,11 @@ namespace ArquillesWPF.MVVM.ViewModel
 
             SubirArquivos = new RelayCommand(p =>
             {
-                EscolherArquivos();
+                _ftp.Transferir(EscolherArquivos());
             });
         }
 
-        private void EscolherArquivos()
+        private string EscolherArquivos()
         {
             string caminhoArquivo;
             string nomeArquivo;
@@ -78,6 +87,11 @@ namespace ArquillesWPF.MVVM.ViewModel
                     caminhoArquivo = ofd.FileName;
                     nomeArquivo = caminhoArquivo.Split('\\')[caminhoArquivo.Split('\\').Length - 1];
                     MessageBox.Show($"Arquivo escolhido para transferência: {nomeArquivo} \n\n({caminhoArquivo.ToString()})");
+                    return caminhoArquivo;
+                }
+                else
+                {
+                    return "";
                 }
             }
             catch (Exception erro)
