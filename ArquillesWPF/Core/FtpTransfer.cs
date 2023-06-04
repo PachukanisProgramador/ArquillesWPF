@@ -35,31 +35,47 @@ namespace ArquillesWPF.Core
         {
             try
             {
-                Uri uri = new Uri("ftp://" + "ftp.microsoft.com" + "//");
+                Uri uri = new Uri("ftp://" + "192.168.100.10" + "//");
                 FtpWebRequest requisicao = (FtpWebRequest)WebRequest.Create(uri);
-                NetworkCredential credenciais = new NetworkCredential(
+
+                if (string.IsNullOrEmpty(uri.UserInfo))
+                {
+                    requisicao.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
+
+                    FtpWebResponse resposta = (FtpWebResponse)requisicao.GetResponse();
+
+                    StreamReader stream = new StreamReader(resposta.GetResponseStream(), Encoding.ASCII);
+
+                    _mensagemLog = stream.ReadToEnd();
+
+                    resposta.Close();
+
+                    return _mensagemLog;
+                }
+                else
+                {
+                    NetworkCredential credenciais = new NetworkCredential(
                     _usuario,
-                    _senha,
-                    Environment.UserDomainName
-                    );
+                    _senha);
 
-                requisicao.Credentials = credenciais;
-                requisicao.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
+                    requisicao.Credentials = credenciais;
+                    requisicao.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
 
-                FtpWebResponse resposta = (FtpWebResponse)requisicao.GetResponse();
+                    FtpWebResponse resposta = (FtpWebResponse)requisicao.GetResponse();
 
-                StreamReader stream = new StreamReader(resposta.GetResponseStream(), Encoding.ASCII);
+                    StreamReader stream = new StreamReader(resposta.GetResponseStream(), Encoding.ASCII);
 
-                _mensagemLog = stream.ReadToEnd();
+                    _mensagemLog = stream.ReadToEnd();
 
-                resposta.Close();
+                    resposta.Close();
 
-                return _mensagemLog;
+                    return _mensagemLog;
+                }
 
             }
             catch (Exception erro)
             {
-                throw erro;
+                return erro.Message;
             }
 
         }

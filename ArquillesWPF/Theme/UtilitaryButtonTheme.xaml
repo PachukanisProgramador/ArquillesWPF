@@ -7,23 +7,24 @@
             <Setter Property="Content" Value="{Binding Content}"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Background" Value="{Binding Background}"/>
-            <Setter Property="FontSize" Value="17"/>
+            <Setter Property="FontSize" Value="16"/>
             <Setter Property="Foreground" Value="{Binding Foreground}"/>
 
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border Background="{TemplateBinding Background}"
-                            CornerRadius="5"
-                            BorderThickness=".1"
-                            BorderBrush="#7E7F9A"
-                            Margin="0,0,10,0">
+                                CornerRadius="5"
+                                BorderThickness=".1"
+                                BorderBrush="#7E7F9A"
+                                Margin="0,0,10,0"
+                                Name="bordaBotao">
                             <ContentPresenter VerticalAlignment="Center" 
                                           HorizontalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#0a0405"/>
+                                <Setter Property="FontSize" Value="16.5"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>

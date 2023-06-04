@@ -13,7 +13,7 @@
         ResizeMode="NoResize"
         AllowsTransparency="True">
 
-    <Border Background="#1b1b1b"
+    <Border Background="#1F1616"
             CornerRadius="5"
             BorderThickness=".3"
             BorderBrush="#DCEBF5">
@@ -30,7 +30,7 @@
                        FontSize="16"
                        TextWrapping="Wrap"/>
             <Border Grid.Row="1"
-                    Background="#212121"
+                    Background="#2E2121"
                     CornerRadius="0,0,5,5"
                     BorderBrush="#DCEBF5">
 
@@ -50,7 +50,6 @@
                                 Content="Sim"
                                 BorderThickness="0"
                                 Background="#DCEBF5"
-                                FontSize="16"
                                 Foreground="#212121"
                                 Style="{StaticResource UtilityButtonTheme}"
                                 Click="BotaoSim_Click"/>
@@ -58,8 +57,7 @@
                         <Button Grid.Column="1"
                                 Content="Não"
                                 BorderThickness="0"
-                                Background="#1b1b1b"
-                                FontSize="16"
+                                Background="#0D0909"
                                 Foreground="#DCEBF5" 
                                 Style="{StaticResource UtilityButtonTheme}"
                                 Click="BotaoNao_Click"/>
