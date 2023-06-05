@@ -12,6 +12,7 @@ using Microsoft.Win32;
 using System.Windows.Controls;
 using System.ComponentModel;
 using System.Xml.Schema;
+using System.Security.Policy;
 
 namespace ArquillesWPF.Core
 {
@@ -21,6 +22,7 @@ namespace ArquillesWPF.Core
         private string _endereco;
         private string _usuario;
         private string _senha;
+        private Uri _uri;
         private FtpWebRequest _requisicao;
 
 
@@ -33,21 +35,21 @@ namespace ArquillesWPF.Core
         public FtpTransfer(string endereco, string usuario, string senha)
         {
             _endereco = endereco; _usuario = usuario; _senha = senha;
-            Uri uri = new Uri("ftp://" + "192.168.100.10" + "//");
+            Uri uri = new Uri("ftp://" + "192.168.100.10" + "/");
+            _uri = uri;
             _requisicao = (FtpWebRequest)WebRequest.Create(uri);
         }
         public string Conectar()
         {
             try
             {
-                Uri uri = new Uri("ftp://" + "192.168.100.10" + "//");
-                FtpWebRequest requisicao = (FtpWebRequest)WebRequest.Create(uri);
+                _requisicao = (FtpWebRequest)WebRequest.Create(_uri);
 
-                if (string.IsNullOrEmpty(uri.UserInfo))
+                if (string.IsNullOrEmpty(_uri.UserInfo))
                 {
-                    requisicao.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
+                    _requisicao.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
 
-                    FtpWebResponse resposta = (FtpWebResponse)requisicao.GetResponse();
+                    FtpWebResponse resposta = (FtpWebResponse)_requisicao.GetResponse();
 
                     StreamReader stream = new StreamReader(resposta.GetResponseStream(), Encoding.ASCII);
 
@@ -63,16 +65,17 @@ namespace ArquillesWPF.Core
                     _usuario,
                     _senha);
 
-                    requisicao.Credentials = credenciais;
-                    requisicao.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
+                    _requisicao.Credentials = credenciais;
+                    _requisicao.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
 
-                    FtpWebResponse resposta = (FtpWebResponse)requisicao.GetResponse();
+                    FtpWebResponse resposta = (FtpWebResponse)_requisicao.GetResponse();
 
                     StreamReader stream = new StreamReader(resposta.GetResponseStream(), Encoding.ASCII);
 
                     _mensagemLog = stream.ReadToEnd();
 
                     resposta.Close();
+                    _requisicao.Method = null;
 
                     return _mensagemLog;
                 }
@@ -87,8 +90,19 @@ namespace ArquillesWPF.Core
 
         public void Transferir(string enderecoArquivo)
         {
-            if(enderecoArquivo != "")
+            _requisicao = (FtpWebRequest)WebRequest.Create(_uri);
+
+            if (string.IsNullOrEmpty(_uri.UserInfo))
             {
+                NetworkCredential credenciais = new NetworkCredential(
+                    _usuario,
+                    _senha);
+
+                _requisicao.Credentials = credenciais;
+            }
+            if (!string.IsNullOrEmpty(enderecoArquivo))
+            {
+                _requisicao.Method = WebRequestMethods.Ftp.UploadFile;
                 Stream ftpTransmissao = _requisicao.GetRequestStream();
                 FileStream fileStream = File.OpenRead(enderecoArquivo);
                 BackgroundWorker processo = new BackgroundWorker();
@@ -99,11 +113,11 @@ namespace ArquillesWPF.Core
 
                 do
                 {
-                    byteRead = fileStream.Read(buffer,0,1024);
-                    ftpTransmissao.Write(buffer,0,byteRead);
+                    byteRead = fileStream.Read(buffer, 0, 1024);
+                    ftpTransmissao.Write(buffer, 0, byteRead);
                     leitor += (double)byteRead;
                     double porcentagemCarregamento = leitor / tamanhoTransmissao * 100;
-                    processo.ReportProgress((int)porcentagemCarregamento):
+                    processo.ReportProgress((int)porcentagemCarregamento);
                 }
                 while (byteRead != 0);
             }

@@ -54,7 +54,7 @@ namespace ArquillesWPF.MVVM.ViewModel
 
         public double ProgressoTransmissao
         {
-            get { return _progressoTransmissao}
+            get { return _progressoTransmissao; }
             set { _progressoTransmissao = value; OnPropertyChanged(); }
         }
 
