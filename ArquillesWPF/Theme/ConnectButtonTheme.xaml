@@ -22,7 +22,7 @@
                                                Margin="5"
                                                Foreground="#212121"
                                                Background="Transparent"
-                                               FontSize="15"
+                                               FontSize="20"
                                                Name="textoBotao"/>
                                 </Grid>
                             </ContentControl>
@@ -32,7 +32,7 @@
                                 <Setter TargetName="Borda" Property="Background" Value="#D9ED8E"/>
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="textoBotao" Property="FontSize" Value="15.5"/>
+                                <Setter TargetName="textoBotao" Property="FontSize" Value="20.5"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>

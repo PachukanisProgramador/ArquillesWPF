@@ -23,11 +23,9 @@ namespace ArquillesWPF.MVVM.ViewModel
         private string _senha;
 
         private FtpTransfer _ftp;
+        private SendConfirmationBoxView _mensagem;
 
         /* Commands */
-
-        public RelayCommand IniciarFtp { get; set; }
-        public RelayCommand SubirArquivos { get; set; }
         public RelayCommand Enviar { get; set; }  
 
         public struct Transmissao 
@@ -52,26 +50,11 @@ namespace ArquillesWPF.MVVM.ViewModel
 
         public HomeViewModel()
         {
-            IniciarFtp = new RelayCommand(o =>
-            {
-                _ftp = new FtpTransfer(VerificarDiretorios());
-                TextoCaixaHistorico = _ftp.Conectar();
-            });
-
-            SubirArquivos = new RelayCommand(o =>
-            {
-                _ftp = new FtpTransfer(EscolherArquivos());
-            });
-
-            Enviar = new RelayCommand(o => { _ftp.Transferir(); }) ;
-        }
-
-        private Transmissao VerificarDiretorios()
-        {
-            transmissao.Servidor = "192.168.100.10";
-            transmissao.Usuario = "Usuario1";
-            transmissao.Senha = "Login@123";
-            return transmissao;
+            Enviar = new RelayCommand(o => { 
+                _ftp.Transferir();
+                _mensagem = new SendConfirmationBoxView();
+                _mensagem.ShowDialog();
+            }) ;
         }
         private Transmissao EscolherArquivos()
         {

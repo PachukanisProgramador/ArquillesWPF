@@ -26,15 +26,8 @@ namespace ArquillesWPF.Core
         private readonly string _nomeArquivo;
         private readonly string _caminhoArquivo;
 
-        private string _mensagemLog;
         private Uri _uri;
         private FtpWebRequest _requisicao;
-
-
-        public string Endereco { get { return _endereco; } set { value = _endereco; } }
-        public string Usuario { get { return _usuario; } set { value = _usuario; } }
-        public string Senha { get { return _senha; } set { value = _senha; } }
-        public string MensagemLog { get { return _mensagemLog; } set { _mensagemLog = value; } }
 
         public FtpTransfer(HomeViewModel.Transmissao transmissao)
         {
@@ -43,40 +36,6 @@ namespace ArquillesWPF.Core
             _senha = transmissao.Senha;
             _nomeArquivo = transmissao.NomeArquivo;
             _caminhoArquivo = transmissao.CaminhoArquivo;
-        }
-        public string Conectar()
-        {
-            try
-            {
-                string texto = string.Format("ftp://{0}/", _endereco);
-                Console.WriteLine(texto);
-                _uri = new Uri(texto);
-
-                _requisicao = (FtpWebRequest)WebRequest.Create(_uri);
-
-                if (!string.IsNullOrEmpty(_uri.UserInfo))
-                {
-                    NetworkCredential credenciais = new NetworkCredential(_usuario, _senha);
-                    _requisicao.Credentials = credenciais;
-                }
-                    _requisicao.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
-
-                    FtpWebResponse resposta = (FtpWebResponse)_requisicao.GetResponse();
-
-                    StreamReader stream = new StreamReader(resposta.GetResponseStream(), Encoding.ASCII);
-
-                    _mensagemLog = stream.ReadToEnd();
-
-                    resposta.Close();
-
-                    return _mensagemLog;
-
-            }
-            catch (Exception erro)
-            {
-                return erro.Message;
-            }
-
         }
 
         public void Transferir()
@@ -96,6 +55,10 @@ namespace ArquillesWPF.Core
                 }
                 if (!string.IsNullOrEmpty(_caminhoArquivo))
                 {
+                    Console.WriteLine($"Iniciando requisição.\nArquivo: {_nomeArquivo}.\nCaminho: {_caminhoArquivo}\nServidor: {_endereco}\nUsuario: {_usuario}\nSenha: {_senha}");
+
+                    NetworkCredential credenciais = new NetworkCredential(_usuario, _senha);
+                    _requisicao.Credentials = credenciais;
 
                     _requisicao.Method = WebRequestMethods.Ftp.UploadFile;
                     Stream ftpTransmissao = _requisicao.GetRequestStream();
@@ -108,14 +71,13 @@ namespace ArquillesWPF.Core
                     {
                         byteRead = fileStream.Read(buffer, 0, 1024);
                         ftpTransmissao.Write(buffer, 0, byteRead);
-                        MessageBox.Show($"Arquivo {_nomeArquivo} enviado com sucesso!");
                     }
                     while (byteRead != 0);
                 }
             }
             catch (Exception erro)
             {
-                Console.WriteLine("Erro: " + erro.Message);
+                Console.WriteLine(erro.Message);
             }
         }
     }

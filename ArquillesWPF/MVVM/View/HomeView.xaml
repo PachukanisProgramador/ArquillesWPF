@@ -3,9 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:ArquillesWPF.MVVM.View"
              xmlns:viewModel="clr-namespace:ArquillesWPF.MVVM.ViewModel"
-             xmlns:ftp="clr-namespace:ArquillesWPF.Core"
              mc:Ignorable="d" 
              d:DesignHeight="570"
              d:DesignWidth="860"
@@ -34,40 +32,41 @@
                    Foreground="#e5e5e5"
                    FontSize="28"
                    HorizontalAlignment="Left"
-                   Margin="30"/>
+                   Margin="30,30,30,30"/>
         <StackPanel Grid.Row="1"
                     Orientation="Horizontal"
-                    VerticalAlignment="Stretch"
-                    HorizontalAlignment="Stretch"
-                    Margin="30,0,0,00">
-
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Margin="0,70,0,0">
+            <TextBlock Text="Endereço:"
+                       Foreground="LightGray"
+                       VerticalAlignment="Center"
+                       FontSize="17"
+                       Margin="0,0,20,0"/>
             <TextBox Style="{StaticResource TextBoxTheme}"
                      Width="150"
                      Height="40"
-                     Text="{Binding Servidor}"
-                     Grid.Column="0"
-                     Margin="0,0,0,0"/>
+                     Text="XXX.XXX.XXX.XXX"
+                     Grid.Column="0"/>
+            <TextBlock Text="Usuário:"
+                       Foreground="LightGray"
+                       VerticalAlignment="Center"
+                       FontSize="17"
+                       Margin="10,0,20,0"/>
             <TextBox Style="{StaticResource TextBoxTheme}"
                              Width="120"
                              Height="40"
-                             Text="{Binding Usuario}"
-                             Grid.Column="1"
-                             Margin="20,0,0,0"/>
-            <TextBox Style="{StaticResource TextBoxTheme}"
+                             Text="'Nome'"
+                             Grid.Column="1"/>
+            <TextBlock Text="Senha:"
+                       Foreground="LightGray"
+                       VerticalAlignment="Center"
+                       FontSize="17"
+                       Margin="10,0,20,0"/>
+            <PasswordBox Style="{StaticResource PasswordBoxTheme}"
                              Width="120"
                              Height="40"
-                             Text="{Binding Senha}"
-                             Grid.Column="2"
-                             Margin="20,0,250,0"
-                     Name="Senha"/>
-            <Button 
-                    Content="Conectar"
-                    Height="30"
-                    Width="100"
-                    Margin="0,0,0,0"
-                    Style="{StaticResource ConnectButtonTheme}"
-                    Command="{Binding IniciarFtp}"/>
-
+                             Grid.Column="2"/>
         </StackPanel>
         <Border Grid.Row="2"
                         BorderBrush="#DCEBF5"
@@ -76,34 +75,9 @@
                         VerticalAlignment="Center"
                 Margin="30,30,30,0"
                 Background="#F0E2A3">
-
-            <StackPanel>
-                <TextBlock Text="Histórico"
-                                   Foreground="#0e0e0e"
-                                   HorizontalAlignment="Left"
-                                   FontSize="20"
-                           Margin="10,1,0,1"/>
-                <TextBlock Width="800"
-                           Height="100"
-                           ScrollViewer.CanContentScroll="True"
-                           Background="Black"
-                           Foreground="Green"
-                           FontSize="18"
-                           Padding="30,2,0,30"
-                           Text="{Binding TextoCaixaHistorico}"/>
-            </StackPanel>
         </Border>
         <StackPanel Grid.Row="4"
-                    Margin="100">
-            <Button Width="200"
-                    Height="35"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Center"
-                    Content="Subir arquivos"
-                    FontSize="18"
-                    Command="{Binding SubirArquivos}"
-                    Style="{StaticResource UploadButtonTheme}"
-                    Margin="0,0,0,10"/>
+                    Margin="50">
             <Button Width="200"
                     Height="70"
                     VerticalAlignment="Center"
@@ -111,7 +85,7 @@
                     Content="Enviar arquivo"
                     FontSize="20"
                     Command="{Binding Enviar}"
-                    Style="{StaticResource UploadButtonTheme}"/>
+                    Style="{StaticResource ConnectButtonTheme}"/>
         </StackPanel>
     </Grid>
 </UserControl>
