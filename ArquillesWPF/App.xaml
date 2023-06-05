@@ -6,6 +6,7 @@
              xmlns:view="clr-namespace:ArquillesWPF.MVVM.View"
              StartupUri="MVVM/View/MainWindow.xaml">
     <!--     // Attention, if you've done everything right and an error subscription appears, just press Ctrl + Shift + B and you'll rebuild the code and make everything settle -->
+    
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -21,6 +22,9 @@
 
             <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
                 <view:HomeView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:AboutViewModel}">
+                <view:AboutView/>
             </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>

@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="ArquillesWPF.MVVM.View.AboutView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ArquillesWPF.MVVM.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="570"
+             d:DesignWidth="860"
+             MinWidth="860"
+             MinHeight="570"
+             Background="Transparent"
+             HorizontalAlignment="Stretch"
+             VerticalAlignment="Stretch">
+    <Grid>
+        <StackPanel Margin="150">
+            <TextBlock Text="A nossa equipe é formada por dois integrantes do curso
+Técnico em Informática: Gustavo Laurindo dos Santos e Thiago Lutten Leitão. A ideia do
+projeto era de facilitar os usuários pouco experientes com redes e/ou ferrramentas de
+clientes FTP para que fosse simples, sem muita informação e acima de tudo algo moderno.
+Link do projeto: https://github.com/PachukanisProgramador/ArquillesWPF.git"
+                       TextWrapping="Wrap"
+                       Foreground="LightGray"
+                       />
+        </StackPanel>   
+    </Grid>
+</UserControl>

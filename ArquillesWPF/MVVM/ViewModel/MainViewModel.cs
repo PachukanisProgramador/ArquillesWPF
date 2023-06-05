@@ -9,6 +9,7 @@ namespace ArquillesWPF.MVVM.ViewModel
     class MainViewModel : ObservableObject
     {
         public HomeViewModel TranferenciaSimplesView { get; set; }
+        public AboutViewModel SobreOProjetoViewModel { get; set; }
         private object _currentView;
 
         /* Commands */
