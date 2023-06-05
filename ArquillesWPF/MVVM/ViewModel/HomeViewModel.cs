@@ -15,83 +15,83 @@ namespace ArquillesWPF.MVVM.ViewModel
 {
     class HomeViewModel : ObservableObject
     {
-        public HomeViewModel HomeVm { get; set; }
-
-        private string _textoEndereco;
         private object _currentView;
         private string _textoCaixaHistorico;
-        private string _textoUsuario;
-        private string _textoSenha;
         private double _progressoTransmissao;
+        private string _servidor;
+        private string _usuario;
+        private string _senha;
+
         private FtpTransfer _ftp;
 
         /* Commands */
 
         public RelayCommand IniciarFtp { get; set; }
         public RelayCommand SubirArquivos { get; set; }
+        public RelayCommand Enviar { get; set; }  
 
-        public string TextoEndereco
+        public struct Transmissao 
         {
-            get { return _textoEndereco; }
-            set { _textoEndereco = value; OnPropertyChanged(); }
+            public string Servidor { get; set; }
+            public string Usuario { get; set; }
+            public string Senha { get; set; }
+            public string NomeArquivo { get; set; }
+            public string  CaminhoArquivo { get; set; }
         }
+        public string Servidor { get { return _servidor; } set { _servidor = value; OnPropertyChanged(); } }
+        public string Usuario { get { return _usuario; } set { _usuario = value; OnPropertyChanged(); } }
+        public string Senha { get { return _senha; } set { _senha = value; OnPropertyChanged(); } }
 
-        public string TextoUsuario
-        {
-            get { return _textoUsuario; }
-            set { _textoUsuario = value; OnPropertyChanged(); }
-        }
-        public string TextoSenha
-        {
-            get { return _textoSenha; }
-            set { _textoSenha = value; OnPropertyChanged(); }
-        }
+        public Transmissao transmissao = new Transmissao();
+
         public string TextoCaixaHistorico
         {
             get { return _textoCaixaHistorico; }
             set { _textoCaixaHistorico = value; OnPropertyChanged(); }
         }
 
-        public double ProgressoTransmissao
-        {
-            get { return _progressoTransmissao; }
-            set { _progressoTransmissao = value; OnPropertyChanged(); }
-        }
-
         public HomeViewModel()
         {
-            _ftp = new FtpTransfer(TextoEndereco, TextoUsuario, TextoSenha);
-
             IniciarFtp = new RelayCommand(o =>
             {
+                _ftp = new FtpTransfer(VerificarDiretorios());
                 TextoCaixaHistorico = _ftp.Conectar();
             });
 
-            SubirArquivos = new RelayCommand(p =>
+            SubirArquivos = new RelayCommand(o =>
             {
-                ProgressoTransmissao = _ftp.Transferir(EscolherArquivos());
+                _ftp = new FtpTransfer(EscolherArquivos());
             });
+
+            Enviar = new RelayCommand(o => { _ftp.Transferir(); }) ;
         }
 
-        private string EscolherArquivos()
+        private Transmissao VerificarDiretorios()
         {
-            string caminhoArquivo;
-            string nomeArquivo;
-
+            transmissao.Servidor = "192.168.100.10";
+            transmissao.Usuario = "Usuario1";
+            transmissao.Senha = "Login@123";
+            return transmissao;
+        }
+        private Transmissao EscolherArquivos()
+        {
             try
             {
                 OpenFileDialog ofd = new OpenFileDialog();
 
                 if (ofd.ShowDialog() == true)
                 {
-                    caminhoArquivo = ofd.FileName;
-                    nomeArquivo = caminhoArquivo.Split('\\')[caminhoArquivo.Split('\\').Length - 1];
-                    MessageBox.Show($"Arquivo escolhido para transferência: {nomeArquivo} \n\n({caminhoArquivo.ToString()})");
-                    return caminhoArquivo;
+                    FileInfo arquivo = new FileInfo(ofd.FileName);
+                    transmissao.Servidor = "192.168.100.10";
+                    transmissao.Usuario = "Usuario1";
+                    transmissao.Senha = "Login@123";
+                    transmissao.CaminhoArquivo = arquivo.FullName;
+                    transmissao.NomeArquivo = arquivo.Name;
+                    return transmissao;
                 }
                 else
                 {
-                    return "";
+                    return transmissao;
                 }
             }
             catch (Exception erro)

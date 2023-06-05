@@ -44,19 +44,19 @@
             <TextBox Style="{StaticResource TextBoxTheme}"
                      Width="150"
                      Height="40"
-                     Text="Endereço"
+                     Text="{Binding Servidor}"
                      Grid.Column="0"
                      Margin="0,0,0,0"/>
             <TextBox Style="{StaticResource TextBoxTheme}"
                              Width="120"
                              Height="40"
-                             Text="Usuário"
+                             Text="{Binding Usuario}"
                              Grid.Column="1"
                              Margin="20,0,0,0"/>
             <TextBox Style="{StaticResource TextBoxTheme}"
                              Width="120"
                              Height="40"
-                             Text="Senha"
+                             Text="{Binding Senha}"
                              Grid.Column="2"
                              Margin="20,0,250,0"
                      Name="Senha"/>
@@ -108,15 +108,10 @@
                     Height="70"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
-                    Content="Enviar"
+                    Content="Enviar arquivo"
                     FontSize="20"
-                    Command="{Binding SubirArquivos}"
-                    Style="{StaticResource UploadButtonTheme}"
-                    Margin="0,0,0,10"/>
-            <ProgressBar Height="10"
-                Minimum="0"
-                Maximum="100"
-                Value="{Binding ProgressoTransmissao}" />
+                    Command="{Binding Enviar}"
+                    Style="{StaticResource UploadButtonTheme}"/>
         </StackPanel>
     </Grid>
 </UserControl>
