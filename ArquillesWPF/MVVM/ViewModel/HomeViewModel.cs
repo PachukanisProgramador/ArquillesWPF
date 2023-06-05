@@ -2,26 +2,16 @@
 using ArquillesWPF.MVVM.View;
 using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace ArquillesWPF.MVVM.ViewModel
 {
     class HomeViewModel : ObservableObject
     {
-        private object _currentView;
-        private string _textoCaixaHistorico;
-        private double _progressoTransmissao;
         private string _servidor;
         private string _usuario;
         private string _senha;
-
         private FtpTransfer _ftp;
         private SendConfirmationBoxView _mensagem;
 
@@ -42,17 +32,19 @@ namespace ArquillesWPF.MVVM.ViewModel
 
         public Transmissao transmissao = new Transmissao();
 
-        public string TextoCaixaHistorico
-        {
-            get { return _textoCaixaHistorico; }
-            set { _textoCaixaHistorico = value; OnPropertyChanged(); }
-        }
-
         public HomeViewModel()
         {
-            Enviar = new RelayCommand(o => { 
+            Enviar = new RelayCommand(o => {
+                EscolherArquivos();
+
+                _ftp = new FtpTransfer(transmissao);
                 _ftp.Transferir();
-                _mensagem = new SendConfirmationBoxView();
+
+                _mensagem = new SendConfirmationBoxView
+                {
+                    Owner = Application.Current.MainWindow,
+                    WindowStartupLocation = WindowStartupLocation.CenterOwner,
+                };
                 _mensagem.ShowDialog();
             }) ;
         }

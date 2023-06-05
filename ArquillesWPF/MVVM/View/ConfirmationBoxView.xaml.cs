@@ -21,7 +21,6 @@ namespace ArquillesWPF.MVVM.View
     /// </summary>
     public partial class ConfirmationBoxView : Window
     {
-        public bool Resultado { get; private set; }
         public ConfirmationBoxView()
         {
             InitializeComponent();
