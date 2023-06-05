@@ -88,7 +88,7 @@ namespace ArquillesWPF.Core
 
         }
 
-        public void Transferir(string enderecoArquivo)
+        public double Transferir(string enderecoArquivo)
         {
             _requisicao = (FtpWebRequest)WebRequest.Create(_uri);
 
@@ -105,7 +105,7 @@ namespace ArquillesWPF.Core
                 _requisicao.Method = WebRequestMethods.Ftp.UploadFile;
                 Stream ftpTransmissao = _requisicao.GetRequestStream();
                 FileStream fileStream = File.OpenRead(enderecoArquivo);
-                BackgroundWorker processo = new BackgroundWorker();
+
                 byte[] buffer = new byte[1024];
                 double tamanhoTransmissao = (double)fileStream.Length;
                 int byteRead = 0;
@@ -117,10 +117,12 @@ namespace ArquillesWPF.Core
                     ftpTransmissao.Write(buffer, 0, byteRead);
                     leitor += (double)byteRead;
                     double porcentagemCarregamento = leitor / tamanhoTransmissao * 100;
-                    processo.ReportProgress((int)porcentagemCarregamento);
+                    return porcentagemCarregamento;
                 }
                 while (byteRead != 0);
             }
+
+            return 0;
         }
     }
 }

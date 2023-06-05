@@ -69,7 +69,7 @@ namespace ArquillesWPF.MVVM.ViewModel
 
             SubirArquivos = new RelayCommand(p =>
             {
-                _ftp.Transferir(EscolherArquivos());
+                ProgressoTransmissao = _ftp.Transferir(EscolherArquivos());
             });
         }
 
