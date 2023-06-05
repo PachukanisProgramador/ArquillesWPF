@@ -13,15 +13,36 @@
              HorizontalAlignment="Stretch"
              VerticalAlignment="Stretch">
     <Grid>
-        <StackPanel Margin="150">
-            <TextBlock Text="A nossa equipe é formada por dois integrantes do curso
-Técnico em Informática: Gustavo Laurindo dos Santos e Thiago Lutten Leitão. A ideia do
-projeto era de facilitar os usuários pouco experientes com redes e/ou ferrramentas de
-clientes FTP para que fosse simples, sem muita informação e acima de tudo algo moderno.
-Link do projeto: https://github.com/PachukanisProgramador/ArquillesWPF.git"
+        <StackPanel HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+            </Grid>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,40">
+                <Viewbox Width="200" Height="200" Grid.Row="0" Margin="30,0,300,0">
+                    <TextBlock>
+                    <Image Source="/Images/github-mark.png" />
+                        <Hyperlink NavigateUri="https://github.com/PachukanisProgramador/ArquillesWPF.git"/>
+                    </TextBlock>
+                </Viewbox>
+                <Viewbox Width="200" Height="200" Grid.Row="0">
+                    <TextBlock>
+                     <Image Source="/Images/arquilles-imagem.png" />
+                        <Hyperlink NavigateUri="https://github.com/PachukanisProgramador/ArquillesWPF.git"/>
+                    </TextBlock>
+                </Viewbox>
+            </StackPanel>
+            <TextBlock Grid.Row="1"
                        TextWrapping="Wrap"
-                       Foreground="LightGray"
-                       />
-        </StackPanel>   
+                       Foreground="LightGray" FontFamily="Corbel" FontSize="25" Height="267" Width="788" FontWeight="Bold"
+                Text="A nossa equipe é formada por dois integrantes do curso Técnico em Informática: Gustavo Laurindo dos Santos e Thiago Lutten Leitão. A ideia do projeto era de facilitar os usuários pouco experientes com redes e/ou ferrramentas de clientes FTP para que fosse simples, sem muita informação e acima de tudo algo moderno. "
+                TextAlignment="Center"
+                >
+                <LineBreak/>
+            </TextBlock>
+        </StackPanel>
     </Grid>
 </UserControl>

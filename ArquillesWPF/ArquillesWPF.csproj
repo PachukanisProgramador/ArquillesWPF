@@ -188,5 +188,14 @@
   <ItemGroup>
     <Resource Include="Images\secureTransfer.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\arquilles-icone.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\github-mark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\arquilles-imagem.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

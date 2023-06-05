@@ -13,7 +13,9 @@
         WindowStyle="None"
         ResizeMode="NoResize"
         Background="Transparent"
-        AllowsTransparency="True">
+        AllowsTransparency="True"
+        Icon="/ArquillesWPF;component/Images/arquilles-icone.ico"
+        FontFamily="Corbel">
 
     <!-- Colors Templates
     #1F0D10
@@ -78,12 +80,16 @@
                                  core:Extensions.Icon="&#x21b7;"
                                  Padding="20,0,0,3"
                                  IsChecked="True"
-                                 Style="{StaticResource MenuButtonTheme}" Cursor="Hand"/>
+                                 Style="{StaticResource MenuButtonTheme}" 
+                                 Cursor="Hand"
+                                 Command="{Binding EntrarTransferencia}"/>
                     <RadioButton Content="Sobre o Projeto"
                                  FontWeight="Normal"
-                                 core:Extensions.Icon="&#128737;"
-                                 Padding="18,0,0,0"
-                                 Style="{StaticResource MenuButtonTheme}"/>
+                                 core:Extensions.Icon="&#x2148;"
+                                 Padding="25,0,0,0"
+                                 Style="{StaticResource MenuButtonTheme}"
+                                 Cursor="Hand"
+                                 Command="{Binding EntrarSobre}"/>
                 </StackPanel>
             </Border>
             <Grid Width="Auto"

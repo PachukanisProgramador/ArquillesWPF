@@ -1,6 +1,7 @@
 ﻿using ArquillesWPF.Core;
 using ArquillesWPF.MVVM.View;
 using System;
+using System.Diagnostics.Contracts;
 using System.Threading;
 using System.Windows;
 
@@ -18,6 +19,10 @@ namespace ArquillesWPF.MVVM.ViewModel
         public RelayCommand ShutDownProgramCommand { get; set; }
 
         public RelayCommand MinimizeWindowCommand { get; set; }
+
+        public RelayCommand EntrarSobre { get; set; }
+
+        public RelayCommand EntrarTransferencia { get; set; }
 
         public object CurrentView
         {
@@ -45,7 +50,12 @@ namespace ArquillesWPF.MVVM.ViewModel
             MinimizeWindowCommand = new RelayCommand(o => { Application.Current.MainWindow.WindowState = WindowState.Minimized; });
 
             TranferenciaSimplesView = new HomeViewModel();
+            SobreOProjetoViewModel = new AboutViewModel();
+
             CurrentView = TranferenciaSimplesView;
+
+            EntrarSobre = new RelayCommand(o => { CurrentView = SobreOProjetoViewModel; });
+            EntrarTransferencia = new RelayCommand(o => { CurrentView = TranferenciaSimplesView; });
         }
     }
 }

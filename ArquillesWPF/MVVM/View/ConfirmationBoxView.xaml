@@ -11,7 +11,8 @@
         WindowStyle="None"
         Background="Transparent"
         ResizeMode="NoResize"
-        AllowsTransparency="True">
+        AllowsTransparency="True"
+        FontFamily="Corbel">
 
     <Border Background="#1F1616"
             CornerRadius="5"
@@ -33,6 +34,9 @@
                     Background="#2E2121"
                     CornerRadius="0,0,5,5"
                     BorderBrush="#DCEBF5">
+                <Border.Effect>
+                    <DropShadowEffect/>
+                </Border.Effect>
 
                 <StackPanel HorizontalAlignment="Right"
                             VerticalAlignment="Bottom"
@@ -49,15 +53,15 @@
                         <Button Grid.Column="0"
                                 Content="Sim"
                                 BorderThickness="0"
-                                Background="#DCEBF5"
-                                Foreground="#212121"
+                                Background="#FFC14040"
+                                Foreground="LightGray"
                                 Style="{StaticResource UtilityButtonTheme}"
                                 Click="BotaoSim_Click"/>
 
                         <Button Grid.Column="1"
                                 Content="Não"
                                 BorderThickness="0"
-                                Background="#0D0909"
+                                Background="#0D0903"
                                 Foreground="#DCEBF5" 
                                 Style="{StaticResource UtilityButtonTheme}"
                                 Click="BotaoNao_Click"/>

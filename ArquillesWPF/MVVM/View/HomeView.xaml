@@ -11,7 +11,8 @@
              MinHeight="570"
              Background="Transparent"
              HorizontalAlignment="Stretch"
-             VerticalAlignment="Stretch">
+             VerticalAlignment="Stretch"
+             FontFamily="Corbel">
     <UserControl.DataContext>
         <viewModel:HomeViewModel/>
     </UserControl.DataContext>

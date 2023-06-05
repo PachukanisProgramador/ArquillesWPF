@@ -10,7 +10,8 @@
         WindowStyle="None"
         Background="Transparent"
         ResizeMode="NoResize"
-        AllowsTransparency="True">
+        AllowsTransparency="True"
+        FontFamily="Corbel">
 
     <Border Background="#1F1616"
             CornerRadius="5"
@@ -32,6 +33,9 @@
                     Background="#2E2121"
                     CornerRadius="0,0,5,5"
                     BorderBrush="#DCEBF5">
+                <Border.Effect>
+                    <DropShadowEffect/>
+                </Border.Effect>
 
                 <StackPanel HorizontalAlignment="Right"
                             VerticalAlignment="Bottom"
